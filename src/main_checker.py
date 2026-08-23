@@ -11,12 +11,13 @@ def check_proxy(proxy):
     #And correct input of proxy from user side
     try:
         answer = requests.get('https://instagram.com', proxies=proxies, verify=True, timeout=10)
-    if answer.status_code == requests.codes.ok:
-        return 'Valid'
+        if answer.status_code == requests.codes.ok:
+            return 'Valid'
+        else:
+            return f'Invalid: {response.status_code}'
     except requests.exceptions.ProxyError as error:
         return f'Invalid, proxy error: {error}'
     except requests.exceptions.Timeout:
         return 'Invalid, timeout'
-    exccept requests.exceptions.ConnectionError as error:
+    except requests.exceptions.ConnectionError as error:
         return f'Invalid, connection error: {error}'
-    return 'Invalid'
