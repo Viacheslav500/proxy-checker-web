@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% if result %}
+        <form class='returned_result'>
+            <div class='checked'>
+                <label for='checked'>Your answer</label>
+                <input type='text' id='result-output' value='{{ result }}' readonly>
+            </div>
+        </form>
+    {% endif %}
+{% endblock %}
