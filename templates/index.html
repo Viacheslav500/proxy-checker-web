@@ -2,7 +2,7 @@
 <html lang='ru'>
     <head>
         <meta charset='utf-8'>
-        <title>Пробный файл</title>
+        <title>Web proxy checker</title>
         <link rel='stylesheet' href="{{url_for('static', filename='style.css') }}">
     </head>
     <body>
@@ -17,7 +17,7 @@
 
             <form class='proxy-form' method='POST' action='/'>
                 <div class='proxy'>
-                    <label for='proxy'>Enter proxy address</label>
+                    <label for='proxy-input'>Enter proxy address</label>
                     <input type='text' name='proxy' id='proxy-input' placeholder='socks5://66.42.59.155:443'>
                     <input type='submit' id='submit-button' value='Submit'>
                 </div>
