@@ -1,18 +1,18 @@
 CREATE TABLE IF NOT EXISTS users(
-    user_id PRIMARY KEY AUTO_INCREMENT,
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
     user_proxy VARCHAR (55),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_ip VARCHAR (55)
 );
 
 CREATE TABLE IF NOT EXISTS users_data (
-    email VARCHAR (100) UNIQUE,
-    password VARCHAR (50) UNIQUE,
+    email VARCHAR (100) UNIQUE NOT NULL,
+    password VARCHAR (50),
     user_ip VARCHAR (55)
 );
 
 CREATE TABLE IF NOT EXISTS proxy_data (
-    proxy_id INTEGER,
+    proxy_id INT,
     proxy VARCHAR (55),
     result VARCHAR (25)
 );

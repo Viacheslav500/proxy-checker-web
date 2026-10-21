@@ -20,5 +20,10 @@ def checking():
     return render_template('view_result.html', result=result)
 
 
+def get_user_ip():
+    ip_address = request.remote_addr
+    return ip_address
+
+
 if __name__ == '__main__':
     app.run(debug=True)

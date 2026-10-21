@@ -1,7 +1,8 @@
 import mysql.connector
+from datetime import datetime
 
 def get_connection():
-    connection = connector.connect (
+    connection = mysql.connector.connect (
         host='localhost',
         user='user_name',
         password='password',
@@ -12,7 +13,7 @@ def get_connection():
 
 def open_connection():
     conn = get_connection()
-    cursor = connection.cursor()
+    cursor = conn.cursor()
     return conn, cursor
 
 
@@ -23,4 +24,14 @@ def close_connection(conn, cursor):
         conn.close()
 
 
+def get_user_table(conn, proxy, date, ip_addr):
+    cur = conn.cursor()
+    cur.execute('INSERT INTO users (user_proxy, created_at, user_ip)
+    VALUES (%s, %s, %s)', (proxy_variable, datetime.now(), ip_address))
+    data = cur.fetchall()
+    return data #suppose it is not necessary because this data are not going to be shown to users
 
+
+def get_proxy_data(conn, proxy, answer):
+    cur = conn.cursor()
+    cur.execute('INSERT INTO proxy_data (proxy, result) VALUES (%s, %s)', (proxy_variable, result)
