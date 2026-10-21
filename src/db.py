@@ -26,12 +26,10 @@ def close_connection(conn, cursor):
 
 def get_user_table(conn, proxy, date, ip_addr):
     cur = conn.cursor()
-    cur.execute('INSERT INTO users (user_proxy, created_at, user_ip)
-    VALUES (%s, %s, %s)', (proxy_variable, datetime.now(), ip_address))
-    data = cur.fetchall()
-    return data #suppose it is not necessary because this data are not going to be shown to users
-
+    cur.execute('INSERT INTO users (user_proxy, created_at, user_ip) VALUES (%s, %s, %s)', (user_proxy, datetime.now(), user_ip))
+    conn.commit()
+    cur.close()
 
 def get_proxy_data(conn, proxy, answer):
     cur = conn.cursor()
-    cur.execute('INSERT INTO proxy_data (proxy, result) VALUES (%s, %s)', (proxy_variable, result)
+    cur.execute('INSERT INTO proxy_data (proxy, result) VALUES (%s, %s)', (proxy, answer))
