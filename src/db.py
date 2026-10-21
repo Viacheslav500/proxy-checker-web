@@ -30,8 +30,8 @@ def get_user_table(conn, proxy, date, ip_addr):
     conn.commit()
     cur.close()
 
-def get_proxy_data(conn, proxy, answer):
-    cur = conn.cursor()
+def get_proxy_data(proxy, answer):
+    conn, cur = open_connection()
     cur.execute('INSERT INTO proxy_data (proxy, result) VALUES (%s, %s)', (proxy, answer))
     conn.commit()
-    cur.close()
+    close_connection(conn, cur)
