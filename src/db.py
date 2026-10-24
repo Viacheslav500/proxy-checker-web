@@ -24,13 +24,14 @@ def close_connection(conn, cursor):
         conn.close()
 
 
-def get_user_table(conn, proxy, date, ip_addr):
+def insert_user_table(proxy, ip_addr):
+    conn, cur = open_connection()
     cur = conn.cursor()
     cur.execute('INSERT INTO users (user_proxy, created_at, user_ip) VALUES (%s, %s, %s)', (proxy, datetime.now(), ip_addr))
     conn.commit()
-    cur.close()
+    close_connection(conn, cur)
 
-def get_proxy_data(proxy, answer):
+def insert_proxy_data(proxy, answer):
     conn, cur = open_connection()
     cur.execute('INSERT INTO proxy_data (proxy, result) VALUES (%s, %s)', (proxy, answer))
     conn.commit()
