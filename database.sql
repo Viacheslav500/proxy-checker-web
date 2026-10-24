@@ -6,13 +6,14 @@ CREATE TABLE IF NOT EXISTS users(
 );
 
 CREATE TABLE IF NOT EXISTS users_data (
+    users_id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR (100) UNIQUE NOT NULL,
-    password VARCHAR (50),
-    user_ip VARCHAR (55)
+    password VARCHAR (255),
+    user_ip VARCHAR (45)
 );
 
 CREATE TABLE IF NOT EXISTS proxy_data (
-    proxy_id INT,
+    proxy_id INT AUTO_INCREMENT PRIMARY KEY,
     proxy VARCHAR (55),
     result VARCHAR (25)
 );

@@ -25,8 +25,7 @@ def close_connection(conn, cursor):
 
 
 def insert_user_table(proxy, ip_addr):
-    conn, cur = open_connection()
-    cur = conn.cursor()
+    conn, cur = open_connection()`
     cur.execute('INSERT INTO users (user_proxy, created_at, user_ip) VALUES (%s, %s, %s)', (proxy, datetime.now(), ip_addr))
     conn.commit()
     close_connection(conn, cur)
