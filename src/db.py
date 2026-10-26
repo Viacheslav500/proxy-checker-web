@@ -1,12 +1,16 @@
+import os
 import mysql.connector
 from datetime import datetime
+from dotenv import loadenv
+
+load_dotenv()
 
 def get_connection():
     connection = mysql.connector.connect (
-        host='localhost',
-        user='user_name',
-        password='password',
-        database='database_name'
+        host=os.getenv('HOST', 'localhost'),
+        user=os.getenv('USER'),
+        password=os.getenv('PASSWORD'),
+        database=os.getenv('DATABASE'),
 )
     return connection
 

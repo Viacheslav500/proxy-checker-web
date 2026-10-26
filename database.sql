@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS proxy_checker_db;
+USE proxy_checker_db
+
 CREATE TABLE IF NOT EXISTS users(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     user_proxy VARCHAR (55),
