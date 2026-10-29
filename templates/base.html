@@ -9,11 +9,17 @@
         <header>
             <h1>Proxy checker</h1>
         </header>
+        <nav class='Menu'><a href='/'>Main</a> | <a href='/history'>History</a> | 
+            <a href='/index'>Check proxy</a>
+        </nav>
         <main class='content'>
             <div class='description'>
                 <p> This site was made to check free proxies and to show the results</p>
             </div>
-            {% block content %} {% endblock %}    
+
+            {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
+
         </main>
         <footer>
             <p>There will be some kind of text for footer</p>
