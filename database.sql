@@ -4,7 +4,7 @@ USE proxy_checker_db
 CREATE TABLE IF NOT EXISTS users(
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     user_proxy VARCHAR (55),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT TIMESTAMP,
     user_ip VARCHAR (55)
 );
 
@@ -18,5 +18,6 @@ CREATE TABLE IF NOT EXISTS users_data (
 CREATE TABLE IF NOT EXISTS proxy_data (
     proxy_id INT AUTO_INCREMENT PRIMARY KEY,
     proxy VARCHAR (55),
-    result VARCHAR (25)
+    result VARCHAR (25),
+    created_at TIMESTAMP DEFAULT CURRENT TIMESTAMP)
 );

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="history">
+        {% if rows %}
+            <table id="proxy_table">
+                <thead>
+                    <tr>
+                        <th>Proxy address</th>
+                        <th>Result</th>
+                        <th>Creation date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            <td>{{ row.proxy }}</td>
+                            <td>{{ row.result }}</td>
+                            <td>{{ row.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>There is nothing to look at</p>
+        {% endif %}
+    </div>
+{% endblock %}

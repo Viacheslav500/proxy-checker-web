@@ -43,7 +43,9 @@ def insert_proxy_data(proxy, answer):
 
 
 def get_proxy():
-    conn, cur = open_connection()
-    cur.execute('SELECT proxy, result FROM proxy_data ORDERED BY proxy_id DESC')
-    return cur.fetchall()
+    conn = get_connection()
+    cur = conn.cursor(dictionary=True)
+    cur.execute('SELECT proxy, result FROM proxy_data ORDER BY proxy_id DESC')
+    rows = cur.fetchall()
     close_connection(conn, cur)
+    return rows
