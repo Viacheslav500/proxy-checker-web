@@ -25,5 +25,14 @@ def get_user_ip():
     return ip_address
 
 
+@app.route('/index', methods=['GET', 'POST'])
+def checking():
+    pass
+
+
+@app.route('/history')
+def get_history():
+    pass
+
 if __name__ == '__main__':
     app.run(debug=True)
