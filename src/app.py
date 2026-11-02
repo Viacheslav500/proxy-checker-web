@@ -10,14 +10,9 @@ STATIC_DIR = os.path.join(BASE_DIR, '..', 'static')
 
 app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def checking():
-    result = None
-    if request.method == 'POST':
-        proxy_variable = request.form.get('proxy')
-        if proxy_variable:
-            result = check_proxy(proxy_variable)
-    return render_template('view_result.html', result=result)
+    return render_template('description.html')
 
 
 def get_user_ip():
@@ -37,7 +32,7 @@ def checking():
 
 @app.route('/history')
 def get_history():
-    pass
+    return render_template('history.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
