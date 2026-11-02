@@ -1,7 +1,7 @@
 import os
 import mysql.connector
 from datetime import datetime
-from dotenv import loadenv
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -11,7 +11,7 @@ def get_connection():
         user=os.getenv('USER'),
         password=os.getenv('PASSWORD'),
         database=os.getenv('DATABASE'),
-)
+    )
     return connection
 
 
@@ -30,22 +30,36 @@ def close_connection(conn, cursor):
 
 def insert_user_table(proxy, ip_addr):
     conn, cur = open_connection()
-    cur.execute('INSERT INTO users (user_proxy, created_at, user_ip) VALUES (%s, %s, %s)', (proxy, datetime.now(), ip_addr))
-    conn.commit()
-    close_connection(conn, cur)
+    try:
+        cur.execute('INSERT INTO users (user_proxy, created_at, user_ip) VALUES (%s, %s, %s)', (proxy, datetime.now(), ip_addr))
+        conn.commit()
+    except mysql.connector.Error:
+        conn.rollback()
+        raise
+    finally:
+        close_connection(conn, cur)
 
 
 def insert_proxy_data(proxy, answer):
     conn, cur = open_connection()
-    cur.execute('INSERT INTO proxy_data (proxy, result) VALUES (%s, %s)', (proxy, answer))
-    conn.commit()
-    close_connection(conn, cur)
+    try:
+        cur.execute('INSERT INTO proxy_data (proxy, result) VALUES (%s, %s)', (proxy, answer))
+        conn.commit()
+    except mysql.connector.Error:
+        conn.rollback()
+        raise
+    finally:
+        close_connection(conn, cur)
 
 
 def get_proxy():
     conn = get_connection()
     cur = conn.cursor(dictionary=True)
-    cur.execute('SELECT proxy, result FROM proxy_data ORDER BY proxy_id DESC')
-    rows = cur.fetchall()
-    close_connection(conn, cur)
-    return rows
+    try:
+        cur.execute('SELECT proxy, result FROM proxy_data ORDER BY proxy_id DESC')
+        rows = cur.fetchall()
+        return rows
+    except mysql.connector.Error:
+        raise
+    finally:
+        close_connection(conn, cur)
