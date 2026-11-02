@@ -27,7 +27,12 @@ def get_user_ip():
 
 @app.route('/index', methods=['GET', 'POST'])
 def checking():
-    pass
+    result = None
+    if request.method == 'POST':
+        proxy_variable = request.form.get('proxy')
+        if proxy_variable:
+            result = check_proxy(proxy_variable)
+    return render_template('view_result.html', result=result)
 
 
 @app.route('/history')
