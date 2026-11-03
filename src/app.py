@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, render_template
 from main_checker import check_proxy
+from db import inser_user_table, insert_proxy_data, get_proxy
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -27,12 +28,15 @@ def checking():
         proxy_variable = request.form.get('proxy')
         if proxy_variable:
             result = check_proxy(proxy_variable)
-    return render_template('view_result.html', result=result)
+            insert_user_table(proxy_variable, get_user_ip())
+            insert_proxy_data(proxy_variable, result)
+    return render_template('index.html', result=result)
 
 
 @app.route('/history')
 def get_history():
-    return render_template('history.html')
+    rows = get_proxy()
+    return render_template('history.html', rows=rows)
 
 if __name__ == '__main__':
     app.run(debug=True)

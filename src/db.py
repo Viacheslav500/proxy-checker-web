@@ -1,6 +1,5 @@
 import os
 import mysql.connector
-from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -31,7 +30,7 @@ def close_connection(conn, cursor):
 def insert_user_table(proxy, ip_addr):
     conn, cur = open_connection()
     try:
-        cur.execute('INSERT INTO users (user_proxy, created_at, user_ip) VALUES (%s, %s, %s)', (proxy, datetime.now(), ip_addr))
+        cur.execute('INSERT INTO users (user_proxy, user_ip) VALUES (%s, %s)', (proxy, ip_addr))
         conn.commit()
     except mysql.connector.Error:
         conn.rollback()
@@ -56,7 +55,7 @@ def get_proxy():
     conn = get_connection()
     cur = conn.cursor(dictionary=True)
     try:
-        cur.execute('SELECT proxy, result FROM proxy_data ORDER BY proxy_id DESC')
+        cur.execute('SELECT proxy, result, created_at FROM proxy_data ORDER BY proxy_id DESC')
         rows = cur.fetchall()
         return rows
     except mysql.connector.Error:
