@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, render_template
 from main_checker import check_proxy
-from db import inser_user_table, insert_proxy_data, get_proxy
+from db import insert_user_table, insert_proxy_data, get_proxy
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
