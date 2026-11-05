@@ -1,5 +1,5 @@
-import requests
 import re
+import requests
 
 
 proxy_pattern = re.compile(
@@ -24,10 +24,15 @@ def check_proxy(proxy):
             'http': proxy,
             'https': proxy
             }
-    #Need to add SSL certificate or ignore it and add proxy .strip
-    #And correct input of proxy from user side
+    # Need to add SSL certificate or ignore it and add proxy .strip
+    # And correct input of proxy from user side
     try:
-        answer = requests.get('https://instagram.com', proxies=proxies, verify=True, timeout=10)
+        answer = requests.get(
+                'https://instagram.com', 
+                proxies=proxies, 
+                verify=True, 
+                timeout=10
+        )
         if answer.status_code == requests.codes.ok:
             return 'Valid'
         else:

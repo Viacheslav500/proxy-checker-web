@@ -1,7 +1,7 @@
 import os
 from flask import Flask, request, render_template
-from main_checker import check_proxy
 from db import insert_user_table, insert_proxy_data, get_proxy
+from main_checker import check_proxy
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -10,6 +10,7 @@ STATIC_DIR = os.path.join(BASE_DIR, '..', 'static')
 
 
 app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
+
 
 @app.route('/')
 def showing_main_page():
@@ -37,6 +38,7 @@ def checking():
 def get_history():
     rows = get_proxy()
     return render_template('history.html', rows=rows)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

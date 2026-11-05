@@ -15,9 +15,7 @@ from src.main_checker import check_proxy, is_valid_proxy
             'socks5://69.61.200.104:36181'
         ],
 )
-
-
-def test_is_valid_proxy(proxy):
+def test_is_valid_proxy_on_valid_data(proxy):
     assert is_valid_proxy(proxy) is True
 
 
@@ -34,9 +32,7 @@ def test_is_valid_proxy(proxy):
             'socks5:69.61.200.104:36181'
         ],
 )
-
-
-def test_is_valid_proxy(proxy_add):
+def test_is_valid_proxy_on_invalid_data(proxy_add):
     assert is_valid_proxy(proxy_add) is False
 
 
@@ -44,4 +40,4 @@ def test_check_proxy():
     assert check_proxy('') == 'Incorrect format'
     assert check_proxy(' ') == 'Incorrect format'
     assert check_proxy('1.1.1.1') == 'Incorrect format'
-    assert check_proxy)'socks5://232.23.12.194') == 'Incorrect format'
+    assert check_proxy('socks5://232.23.12.194') == 'Incorrect format'
