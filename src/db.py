@@ -9,9 +9,9 @@ def get_connection():
     connection = mysql.connector.connect(
         host=os.getenv('HOST', 'localhost'),
         port=3306,
-        user=os.getenv('USER'),
-        password=os.getenv('PASSWORD'),
-        database=os.getenv('DATABASE'),
+        user=os.getenv('USERNAME'),
+        password=os.getenv('PASSWORD_MYSQL'),
+        database=os.getenv('DATABASE_NAME'),
     )
     return connection
 
