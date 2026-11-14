@@ -38,8 +38,8 @@ def check_proxy(proxy):
         else:
             return f'Invalid: {answer.status_code}'
     except requests.exceptions.ProxyError as error:
-        return f'Invalid, proxy error: {error}'
+        return f'Invalid, proxy error'
     except requests.exceptions.Timeout:
         return 'Invalid, timeout'
     except requests.exceptions.ConnectionError as error:
-        return f'Invalid, connection error: {error}'
+        return f'Invalid, connection error'
