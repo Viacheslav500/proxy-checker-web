@@ -40,5 +40,14 @@ def get_history():
     return render_template('history.html', rows=rows)
 
 
+@app.route('/registration', methods=['GET', 'POST'])
+def registrate_user():
+    return render_template('registration.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login_user():
+    return render_template('login.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
