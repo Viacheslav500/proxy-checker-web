@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS users_data (
     users_id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR (100) UNIQUE NOT NULL,
-    password VARCHAR (255),
+    nickname VARCHAR (100) UNIQUE NOT NULL,
+    password_hash VARCHAR (255),
     user_ip VARCHAR (45)
 );
 

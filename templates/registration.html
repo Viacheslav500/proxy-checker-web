@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <form class='reg_form' method='POST' action='/registration'>
+        <div class='user_reg'>
+            <label for='user_reg'>Nickname</label>
+            <input type='text' name='nickname' id='user_reg' placeholder='Enter your name' minlength='3' required>
+            <label for='user_reg'>Password</label>
+            <input type='text' name='user_password' placeholder='Enter your password' minlength='8' required>
+            <label for='user_reg'>Confirm the password</label>
+            <input type='text' name='pass_confirmation' placeholder='Enter the password again' minlength='8' required>
+            <button type='submit'>Sign up</button>
+        </div>
+    </form>
+
+{% endblock %}
