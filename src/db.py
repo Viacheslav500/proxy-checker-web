@@ -1,6 +1,7 @@
 import os
 import mysql.connector
 from dotenv import load_dotenv
+from werkzeug.security import generate_password_hash, check_password_hash
 
 load_dotenv()
 
@@ -80,3 +81,75 @@ def get_proxy():
         raise
     finally:
         close_connection(conn, cur)
+
+
+def insert_into_users_data(name, password):
+    conn, cur = open_connection()
+    try:
+        cur.execute(
+            """
+            INSERT INTO users_data (nickname, password_hash)
+            VALUES (%s, %s)
+            """,
+            (name, generate_password_hash(password))
+        )
+        conn.commit()
+    except mysql.connector.Error:
+        conn.rollback()
+        raise
+    finally:
+        close_connection(conn, cur)
+
+
+def get_user_for_check(user_name):
+    conn = get_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute(
+                """
+                SELECT nickname FROM users_data
+                WHERE nickname = %s
+                """,
+                (user_name,)
+        )
+        data= cur.fetchone()
+        return data
+    except mysql.connector.Error:
+        raise
+    finally:
+        close_connection(conn, cur)
+
+
+def get_nickname_to_check_hash(user_name):
+    conn = get_connection()
+    cur = conn.cursor(dictionary=True)
+    try:
+        cur.execute(
+            """ 
+            SELECT nickname, password_hash
+            FROM users_data
+            WHERE nickname = %s
+            """, 
+            (user_name,)
+        )
+        data = cur.fetchone()
+        return data
+    except mysql.connector.Error:
+        raise
+    finally:
+        close_connection(conn, cur)
+
+
+def check_hash(name, password):
+    user = get_nickname_to_check_hash(name)
+
+    if user is None:
+        return None
+
+    is_valid = check_password_hash(user['password_hash'], password)
+
+    if not is_valid:
+        return False
+
+    else:
+        return True
