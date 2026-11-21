@@ -83,15 +83,15 @@ def get_proxy():
         close_connection(conn, cur)
 
 
-def insert_into_users_data(name, password):
+def insert_into_users_data(name, password, ip_addr):
     conn, cur = open_connection()
     try:
         cur.execute(
             """
-            INSERT INTO users_data (nickname, password_hash)
-            VALUES (%s, %s)
+            INSERT INTO users_data (nickname, password_hash, user_ip)
+            VALUES (%s, %s, %s)
             """,
-            (name, generate_password_hash(password))
+            (name, generate_password_hash(password), ip_addr)
         )
         conn.commit()
     except mysql.connector.Error:
@@ -126,7 +126,7 @@ def get_nickname_to_check_hash(user_name):
     try:
         cur.execute(
             """ 
-            SELECT nickname, password_hash
+            SELECT users_id, nickname, password_hash
             FROM users_data
             WHERE nickname = %s
             """, 
