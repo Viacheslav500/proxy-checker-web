@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, request, render_template, redirect, url_for, flash, session
 from db import (
         insert_user_table, 
         insert_proxy_data, 
@@ -80,13 +80,24 @@ def login_user():
         password = request.form.get('login_password', '')
         result = check_hash(name, password)
         if result is True:
+            session.clear()
+            session['name'] = name
+            session['logged_in'] = True
             flash('You are logged in', 'alert-success')
+            return redirect(url_for('showing_main_page'))
         elif result is False:
             flash('Incorrect password', 'alert-danger')
         else:
             flash('User is not found', 'alert-danger')
-        return redirect(url_for('showing_main_page'))
+        return redirect(url_for('login_user'))
     return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('showing_main_page'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

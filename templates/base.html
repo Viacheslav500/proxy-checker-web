@@ -9,13 +9,31 @@
         <header>
             <h1>Proxy checker</h1>
         </header>
+
+        {% with messages=get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class='alert {{ category }}' role='alert'>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
         <nav class='Menu'><a href='/'>Main</a> | <a href='/history'>History</a> | 
             <a href='/index'>Check proxy</a>
+
+            {% if session.get('logged_in') %}
+            |   <a href='/logout'>Logout</a>
+            {% else %}
+            |   <a href='/registration'>Sign up</a>
+            |   <a href='/login'>Sign in</a>
+            {% endif %}
+
         </nav>
         <main class="content">
         {% block content %}{% endblock %}
     </main>
-
         <footer>
             <p>There will be some kind of text for footer</p>
         </footer>
