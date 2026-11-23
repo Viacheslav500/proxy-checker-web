@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from flask import Flask, request, render_template, redirect, url_for, flash, session
-from db import (
+from .db import (
         insert_user_table, 
         insert_proxy_data, 
         get_proxy, 
@@ -9,7 +9,7 @@ from db import (
         get_user_for_check, 
         check_hash
 )
-from main_checker import check_proxy
+from .main_checker import check_proxy
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

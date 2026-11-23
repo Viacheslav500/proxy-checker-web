@@ -4,4 +4,4 @@ COPY pyproject.toml uv.lock ./
 RUN uv sync --locked --no-install-project
 COPY . .
 EXPOSE 5000
-CMD ["uv", "run", "src/app.py"]
+CMD ["uv", "run", "gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "src.app:app"]
