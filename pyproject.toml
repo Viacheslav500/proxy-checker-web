@@ -1,7 +1,7 @@
 [project]
 name = "proxy-checker-web"
 version = "0.1.0"
-description = "Add your description here"
+description = "A simple Flask web application for checking proxy servers"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -11,6 +11,10 @@ dependencies = [
     "python-dotenv>=1.2.4",
     "requests[socks]>=2.34.2",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [

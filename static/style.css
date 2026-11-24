@@ -75,3 +75,33 @@ header {
     color: #b02a37;
     border-color: #f5b7b1;
 }
+
+
+.login_form {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user_log {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.reg_form {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user_reg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
