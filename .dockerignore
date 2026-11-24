@@ -32,5 +32,4 @@ venv
 .ruff_cache/
 Dockerfile
 compose.yaml
-README.md
 database.sql
